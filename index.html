@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heartbeat Animation with Name</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            font-family: "Arial", sans-serif;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .heart-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: float 3s infinite ease-in-out;
+        }
+        .heart {
+            width: 120px;
+            height: 120px;
+            background-color: #e63946;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: heartbeat 1s infinite;
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 120px;
+            height: 120px;
+            background-color: #e63946;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart::before {
+            top: -60px;
+            left: 0;
+        }
+        .heart::after {
+            top: 0;
+            left: 60px;
+        }
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) rotate(-45deg);
+            }
+        }
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        .name {
+            position: absolute;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            z-index: 2;
+            animation: sparkle 1.5s infinite alternate;
+        }
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                text-shadow: 0 0 5px #ffcccc, 0 0 10px #ff9999;
+            }
+            100% {
+                opacity: 0.8;
+                text-shadow: 0 0 10px #ff9999, 0 0 20px #ff6666;
+            }
+        }
+        .fighting {
+            font-size: 42px;
+            font-weight: bold;
+            margin-top: 30px;
+            text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ffd166;
+            animation: glow 1s infinite alternate, bounce 1.5s infinite;
+        }
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px #ff6b6b, 0 0 20px #ffd166;
+            }
+            100% {
+                text-shadow: 0 0 20px #ff6b6b, 0 0 40px #ffd166;
+            }
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .background-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        .background-hearts div {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff6b6b;
+            transform: rotate(-45deg);
+            animation: floatHearts 6s infinite linear;
+            opacity: 0.6;
+        }
+        .background-hearts div::before,
+        .background-hearts div::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+        }
+        .background-hearts div::before {
+            top: -7.5px;
+            left: 0;
+        }
+        .background-hearts div::after {
+            left: 7.5px;
+            top: 0;
+        }
+        @keyframes floatHearts {
+            0% {
+                transform: translateY(100vh) rotate(-45deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-hearts">
+        <script>
+            for (let i = 0; i < 50; i++) {
+                let heart = document.createElement("div");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+                document.querySelector(".background-hearts").appendChild(heart);
+            }
+        </script>
+    </div>
+    <div class="heart-container">
+        <span class="name"></span>
+        <div class="heart"></div>
+    </div>
+    <div class="fighting">Rảnh quá ngồi code tặng anh Đệ đóa </div>
+</body>
+</html>
